@@ -1,0 +1,25 @@
+﻿@using FypEvaluationSystem.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Existing_form> data = ViewBag.forms;
+}
+<div class="table-responsive mt-5">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="full-height text-white">Form Titles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < data.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.Partial("_Modal", new ViewDataDictionary { { "FormTitle", data[i].Form_title }, {"FormID", data[i].Form_id } })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

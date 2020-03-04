@@ -1,0 +1,437 @@
+﻿@using FypEvaluationSystem.Models;
+
+@{
+    int flag = 2;
+    Evaluated_form formInfo2 = this.ViewData.ContainsKey("FormInfo") ? (Evaluated_form)this.ViewData["FormInfo"] : null;
+
+    Existing_form formInfo = this.ViewData.ContainsKey("FormInfo2") ? (Existing_form)this.ViewData["FormInfo2"] : null;
+
+    Existing_form formDetails = null;
+
+    if (formInfo2 == null)
+    {
+        flag = 1;
+        formDetails = this.ViewData.ContainsKey("FormDetails") ? (Existing_form)this.ViewData["FormDetails"] : null;
+    }
+
+    bool Disabled = this.ViewData.ContainsKey("Disabled") ? (bool)this.ViewData["Disabled"] : false;
+
+    string criteria = "";
+    string ass_fields = "";
+
+    if (flag == 1)
+    {
+        foreach (var x in formInfo.criteria_template)
+        {
+            criteria += x.Criteria_title + "," + x.Total_marks + "\r\n";
+        }
+
+        foreach (var x in formInfo.field_template)
+        {
+            ass_fields += x.Field_title + ",";
+        }
+    }
+}
+
+<style>
+    .form-design {
+        border: none;
+        border-bottom: 1px solid #615F5F;
+    }
+
+    .border {
+        box-shadow: 2px 8px 8px 8px #615F5F;
+    }
+
+    .custom {
+        width: 200%;
+    }
+</style>
+
+<div class="container">
+    @if (flag == 1)
+    {
+        <div class="border mt-5 p-3 mb-3 demo" id="print-content">
+
+            <h4 class="text-center">National University of Computer and Emerging Sciences (@formInfo.Campus Campus)</h4>
+
+            <div class="d-flex justify-content-between mt-2">
+                <div class="ml-5">
+                    <img src="~/Content/images/fastlogo.png" class="logo" style="height:130px;" alt="fast logo" />
+                </div>
+                <div class="mr-5">
+                    <img src="~/Content/images/nulogo.png" class="logo" style="height:130px;" alt="nu logo" />
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h5>@formInfo.Form_title</h5>
+            </div>
+
+            <div class="form-group d-flex mt-4">
+                <label class="mr-2">Project&nbsp;Title</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="">
+                }
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Group&nbsp;Leader&nbsp;ID</label>
+                    @if (Disabled)
+                    {
+
+                        <input class="form-control form-design" type="text" value="" disabled>
+                    }
+                    else
+                    {
+                        <input class="form-control form-design" type="text" value="" />
+                    }
+                </div>
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Group&nbsp;Leader&nbsp;Name</label>
+                    @if (Disabled)
+                    {
+                        <input class="form-control form-design" type="text" value="" disabled>
+                    }
+                    else
+                    {
+                        <input class="form-control form-design" type="text" value="">
+                    }
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Supervisor</label>
+                    @if (Disabled)
+                    {
+                        <input class="form-control form-design" type="text" value="" disabled>
+                    }
+                    else
+                    {
+                        <input class="form-control form-design" type="text" value="" />
+                    }
+
+                </div>
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">CoSupervisor</label>
+                    @if (Disabled)
+                    {
+                        <input class="form-control form-design" type="text" value="" disabled>
+                    }
+                    else
+                    {
+
+                        <input class="form-control form-design" type="text" value="" />
+                    }
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio1">
+                        <input type="radio" class="form-check-input" id="accepted" name="optradio" value="Accepted" checked>Accepted
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio2">
+                        <input type="radio" class="form-check-input" id="accepted-with-changes" name="optradio" value="Accepted With Changes">Accepted With Changes
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" id="rejected" name="optradio" value="Rejected">Rejected
+                    </label>
+                </div>
+            </div>
+
+            <div class="table-responsive mt-5">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Assesment Criteria</th>
+                            <th>Member 1</th>
+                            <th>Member 2</th>
+                            <th>Member 3</th>
+                            <th>Criteria Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in formInfo.criteria_template)
+                        {
+                            <tr>
+                                <td>@item.Criteria_title</td>
+                                <td>
+                                    <div class="form-group">
+                                        @if (Disabled)
+                                        {
+
+                                            <input class="form-control form-design" type="text" value="" disabled>
+                                        }
+                                        else
+                                        {
+
+                                            <input class="form-control form-design" type="text" value="">
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @if (Disabled)
+                                        {
+                                            <input class="form-control form-design" type="text" value="" disabled>
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control form-design" type="text" value="" />
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @if (Disabled)
+                                        {
+                                            <input class="form-control form-design" type="text" value="" disabled>
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control form-design" type="text" value="" />
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>@item.Total_marks</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group mt-4">
+                @foreach (var item in formInfo.field_template)
+                {
+                    <label for="comment">@item.Field_title</label>
+                    if (Disabled)
+                    {
+                        <textarea class="form-control" rows="1" id="comment" disabled></textarea>
+                    }
+                    else
+                    {
+                        <textarea class="form-control" rows="2" id="comment"></textarea>
+                    }
+                }
+            </div>
+
+            <div class="form-group d-flex mt-5">
+                <label class="mr-2">Evaluator&nbsp;name&nbsp;&&nbsp;signature</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="" />
+                }
+
+            </div>
+            <div class="form-group d-flex mt-4">
+                <label class="mr-2">Supervisor&nbsp;Comment&nbsp;&&nbsp;signature</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="" />
+
+                }
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-warning mt-4" data-toggle="modal" data-target="#myModal">Edit</button>
+    }
+
+    else
+    {
+        <div class="border mt-5 p-3 mb-3" id="print-content">
+
+            <h4 class="text-center">National University of Computer and Emerging Sciences (@formDetails.Campus Campus)</h4>
+
+            <div class="d-flex justify-content-between mt-2">
+                <div class="ml-5">
+                    <img src="~/Content/images/fastlogo.png" class="logo" style="height:130px;" alt="fast logo" />
+                </div>
+                <div class="mr-5">
+                    <img src="~/Content/images/nulogo.png" class="logo" style="height:130px;" alt="nu logo" />
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h5>@formDetails.Form_title</h5>
+            </div>
+
+            <div class="form-group d-flex mt-4">
+                <label class="mr-2">Project&nbsp;Title</label>
+                <input class="form-control form-design" type="text" value=@formInfo2.Project_title disabled>
+                @*@if (Disabled)
+                    {
+                        <input class="form-control form-design" type="text" value="" disabled>
+                    }
+                    else
+                    {
+                        <input class="form-control form-design" type="text" value= @formInfo2.Project_title disabled>
+                    }*@
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Group&nbsp;Leader&nbsp;ID</label>
+                    <input class="form-control form-design" type="text" value=@formInfo2.Leader_id disabled>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Supervisor</label>
+                    <input class="form-control form-design" type="text" value=@formInfo2.Supervisor_name disabled>
+                </div>
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">CoSupervisor</label>
+                    <input class="form-control form-design" type="text" value=@formInfo2.Cosupervisor_name disabled>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <label class="mr-2">Status: @formInfo2.Form_status</label>
+            </div>
+
+            <div class="table-responsive mt-5">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Assesment Criteria</th>
+                            <th>@formInfo2.criteria_marks[0].Student_id</th>
+                            <th>@formInfo2.criteria_marks[1].Student_id</th>
+                            <th>@formInfo2.criteria_marks[2].Student_id</th>
+                            <th>Total Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < formDetails.criteria_template.Count; i += 2)
+                        {
+                            <tr>
+                                <td>@formDetails.criteria_template[i].Criteria_title</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control form-design" type="text" value=@formInfo2.criteria_marks[0].Obtained_marks disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control form-design" type="text" value=@formInfo2.criteria_marks[1].Obtained_marks disabled>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control form-design" type="text" value=@formInfo2.criteria_marks[2].Obtained_marks disabled>
+                                    </div>
+                                </td>
+                                <td>@formDetails.criteria_template[i].Total_marks</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group mt-4">
+                @for (int i = 0; i < formDetails.field_template.Count; i++)
+                {
+                    <label for="comment">@formDetails.field_template[i].Field_title</label>
+                    <input class="form-control form-design" type="text" value=@formInfo2.field_text[i].Field_text1 disabled>
+                }
+            </div>
+
+            <div class="form-group d-flex mt-5">
+                <label class="mr-2">Evaluator&nbsp;name&nbsp;&&nbsp;signature</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="" />
+                }
+
+            </div>
+            <div class="form-group d-flex mt-4">
+                <label class="mr-2">Supervisor&nbsp;Comment&nbsp;&&nbsp;signature</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="" />
+
+                }
+
+            </div>
+        </div>
+    }
+
+    <button class="btn btn-primary float-right mt-4" onclick="myFunction()">Print</button>
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Do you want to create new or override the previous form ?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">
+                    @Html.ActionLink("Create New", "Edit", "Admin", new { formInfo.Campus, formInfo.Department, formInfo.Form_weightage, formInfo.Form_id, formInfo.Form_title, criteria, ass_fields, Disabled = Disabled, OverRide = false, formInfo.Year, formInfo.Semester, formInfo.Project_no }, new { @class = "text-white" })
+                </button>
+                <button type="button" class="btn btn-danger">
+                    @Html.ActionLink("Override", "Edit", "Admin", new { formInfo.Campus, formInfo.Department, formInfo.Form_weightage, formInfo.Form_id, formInfo.Form_title, criteria, ass_fields, Disabled = Disabled, OverRide = true, formInfo.Year, formInfo.Semester, formInfo.Project_no }, new { @class = "text-white" })
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var prtContent = document.getElementById("print-content");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+
+        WinPrint.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">');
+        WinPrint.document.write('<link href="~/Content/CustomCss/Custom.css" rel="stylesheet" type="text/css" />');
+        WinPrint.document.write('<link href="~/Content/font-awesome.css" rel="stylesheet" />');
+        WinPrint.document.write('<script src="~/Scripts/modernizr-2.8.3.js"><\/script>');
+        WinPrint.document.write('<link href="~/Content/CustomCss/Custom.css" rel="stylesheet" />');
+
+
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>

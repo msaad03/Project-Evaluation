@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyFirstDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Admin_id" />
+    </Key>
+    <Property Name="Admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Admin_email" Type="varchar" MaxLength="50" />
+    <Property Name="Admin_name" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Criteria_marks">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="Form_id" Type="int" Nullable="false" />
+    <Property Name="Criteria_template_id" Type="int" Nullable="false" />
+    <Property Name="Student_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Obtained_marks" Type="float" Nullable="false" />
+    <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Criteria_template">
+    <Key>
+      <PropertyRef Name="Criteria_id" />
+    </Key>
+    <Property Name="Criteria_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Form_template_id" Type="int" Nullable="false" />
+    <Property Name="Criteria_title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Total_marks" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Evaluated_form">
+    <Key>
+      <PropertyRef Name="Form_id" />
+    </Key>
+    <Property Name="Form_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Template_id" Type="int" Nullable="false" />
+    <Property Name="Jury_id1" Type="int" Nullable="false" />
+    <Property Name="Group_id" Type="int" Nullable="false" />
+    <Property Name="Form_status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Field_template">
+    <Key>
+      <PropertyRef Name="Field_id" />
+    </Key>
+    <Property Name="Field_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Form_template_id" Type="int" Nullable="false" />
+    <Property Name="Field_title" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Field_text">
+    <Key>
+      <PropertyRef Name="FID" />
+    </Key>
+    <Property Name="Form_id" Type="int" Nullable="false" />
+    <Property Name="Field_template_id" Type="int" Nullable="false" />
+    <Property Name="Field_text" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Group_id" />
+    </Key>
+    <Property Name="Group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Leader_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Supervisor_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cosupervisor_name" Type="varchar" MaxLength="50" />
+    <Property Name="Project_title" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student_id" />
+    </Key>
+    <Property Name="Student_id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Group_id" Type="int" Nullable="false" />
+    <Property Name="Student_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Student_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Teacher_id" />
+    </Key>
+    <Property Name="Teacher_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Teacher_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Teacher_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Template_form">
+    <Key>
+      <PropertyRef Name="Form_id" />
+    </Key>
+    <Property Name="Form_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Form_weightage" Type="float" Nullable="false" />
+    <Property Name="Form_title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Campus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Semester" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Project_no" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Criteria_marks_Criteria_template">
+    <End Role="Criteria_template" Type="Self.Criteria_template" Multiplicity="1" />
+    <End Role="Criteria_marks" Type="Self.Criteria_marks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Criteria_template">
+        <PropertyRef Name="Criteria_id" />
+      </Principal>
+      <Dependent Role="Criteria_marks">
+        <PropertyRef Name="Criteria_template_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Criteria_marks_Evaluated_form">
+    <End Role="Evaluated_form" Type="Self.Evaluated_form" Multiplicity="1" />
+    <End Role="Criteria_marks" Type="Self.Criteria_marks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evaluated_form">
+        <PropertyRef Name="Form_id" />
+      </Principal>
+      <Dependent Role="Criteria_marks">
+        <PropertyRef Name="Form_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Criteria_marks_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Criteria_marks" Type="Self.Criteria_marks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_id" />
+      </Principal>
+      <Dependent Role="Criteria_marks">
+        <PropertyRef Name="Student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Criteria_template_Template_form">
+    <End Role="Template_form" Type="Self.Template_form" Multiplicity="1" />
+    <End Role="Criteria_template" Type="Self.Criteria_template" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template_form">
+        <PropertyRef Name="Form_id" />
+      </Principal>
+      <Dependent Role="Criteria_template">
+        <PropertyRef Name="Form_template_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evaluated_form_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Evaluated_form" Type="Self.Evaluated_form" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Group_id" />
+      </Principal>
+      <Dependent Role="Evaluated_form">
+        <PropertyRef Name="Group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evaluated_form_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Evaluated_form" Type="Self.Evaluated_form" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Teacher_id" />
+      </Principal>
+      <Dependent Role="Evaluated_form">
+        <PropertyRef Name="Jury_id1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evaluated_form_Template_form">
+    <End Role="Template_form" Type="Self.Template_form" Multiplicity="1" />
+    <End Role="Evaluated_form" Type="Self.Evaluated_form" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template_form">
+        <PropertyRef Name="Form_id" />
+      </Principal>
+      <Dependent Role="Evaluated_form">
+        <PropertyRef Name="Template_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Field_template_Template_form">
+    <End Role="Template_form" Type="Self.Template_form" Multiplicity="1" />
+    <End Role="Field_template" Type="Self.Field_template" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template_form">
+        <PropertyRef Name="Form_id" />
+      </Principal>
+      <Dependent Role="Field_template">
+        <PropertyRef Name="Form_template_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Field_text_Evaluated_form">
+    <End Role="Evaluated_form" Type="Self.Evaluated_form" Multiplicity="1" />
+    <End Role="Field_text" Type="Self.Field_text" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evaluated_form">
+        <PropertyRef Name="Form_id" />
+      </Principal>
+      <Dependent Role="Field_text">
+        <PropertyRef Name="Form_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Field_text_Field_template">
+    <End Role="Field_template" Type="Self.Field_template" Multiplicity="1" />
+    <End Role="Field_text" Type="Self.Field_text" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Field_template">
+        <PropertyRef Name="Field_id" />
+      </Principal>
+      <Dependent Role="Field_text">
+        <PropertyRef Name="Field_template_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Group_id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyFirstDBModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Criteria_marks" EntityType="Self.Criteria_marks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Criteria_template" EntityType="Self.Criteria_template" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Evaluated_form" EntityType="Self.Evaluated_form" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Field_template" EntityType="Self.Field_template" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Field_text" EntityType="Self.Field_text" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Template_form" EntityType="Self.Template_form" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Criteria_marks_Criteria_template" Association="Self.FK_Criteria_marks_Criteria_template">
+      <End Role="Criteria_template" EntitySet="Criteria_template" />
+      <End Role="Criteria_marks" EntitySet="Criteria_marks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Criteria_marks_Evaluated_form" Association="Self.FK_Criteria_marks_Evaluated_form">
+      <End Role="Evaluated_form" EntitySet="Evaluated_form" />
+      <End Role="Criteria_marks" EntitySet="Criteria_marks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Criteria_marks_Student" Association="Self.FK_Criteria_marks_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Criteria_marks" EntitySet="Criteria_marks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Criteria_template_Template_form" Association="Self.FK_Criteria_template_Template_form">
+      <End Role="Template_form" EntitySet="Template_form" />
+      <End Role="Criteria_template" EntitySet="Criteria_template" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evaluated_form_Group" Association="Self.FK_Evaluated_form_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Evaluated_form" EntitySet="Evaluated_form" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evaluated_form_Teacher" Association="Self.FK_Evaluated_form_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Evaluated_form" EntitySet="Evaluated_form" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evaluated_form_Template_form" Association="Self.FK_Evaluated_form_Template_form">
+      <End Role="Template_form" EntitySet="Template_form" />
+      <End Role="Evaluated_form" EntitySet="Evaluated_form" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Field_template_Template_form" Association="Self.FK_Field_template_Template_form">
+      <End Role="Template_form" EntitySet="Template_form" />
+      <End Role="Field_template" EntitySet="Field_template" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Field_text_Evaluated_form" Association="Self.FK_Field_text_Evaluated_form">
+      <End Role="Evaluated_form" EntitySet="Evaluated_form" />
+      <End Role="Field_text" EntitySet="Field_text" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Field_text_Field_template" Association="Self.FK_Field_text_Field_template">
+      <End Role="Field_template" EntitySet="Field_template" />
+      <End Role="Field_text" EntitySet="Field_text" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Group" Association="Self.FK_Student_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,29 @@
+﻿
+@using FypEvaluationSystem.Models
+@{
+    ViewBag.Title = "FormDesign";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    Evaluated_form FormInfo = null;
+    Existing_form FormInfo2 = null;
+
+    Existing_form formDetails = ViewBag.formDetails;
+
+    if (ViewBag.form != null)
+    {
+        FormInfo = (Evaluated_form)ViewBag.form;
+    }
+    else
+    {
+        FormInfo2 = (Existing_form)ViewBag.FormInfo;
+    }
+    bool Disabled = ViewBag.Disabled;
+}
+@if (ViewBag.form != null)
+{
+    @Html.Partial("_FormDesign", null, new ViewDataDictionary { { "FormInfo", FormInfo }, { "FormDetails", formDetails }, { "Disabled", Disabled } })
+}
+else
+{
+    @Html.Partial("_FormDesign", null, new ViewDataDictionary { { "FormInfo2", FormInfo2 }, { "Disabled", Disabled } })
+}

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyFirstDBModelStoreContainer" CdmEntityContainer="MyFirstDBEntities">
+    <EntitySetMapping Name="Admin">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+          <ScalarProperty Name="Admin_email" ColumnName="Admin_email" />
+          <ScalarProperty Name="Admin_name" ColumnName="Admin_name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Criteria_template">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Criteria_template">
+        <MappingFragment StoreEntitySet="Criteria_template">
+          <ScalarProperty Name="Criteria_id" ColumnName="Criteria_id" />
+          <ScalarProperty Name="Form_template_id" ColumnName="Form_template_id" />
+          <ScalarProperty Name="Criteria_title" ColumnName="Criteria_title" />
+          <ScalarProperty Name="Total_marks" ColumnName="Total_marks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Evaluated_form">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Evaluated_form">
+        <MappingFragment StoreEntitySet="Evaluated_form">
+          <ScalarProperty Name="Form_id" ColumnName="Form_id" />
+          <ScalarProperty Name="Template_id" ColumnName="Template_id" />
+          <ScalarProperty Name="Jury_id1" ColumnName="Jury_id1" />
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+          <ScalarProperty Name="Form_status" ColumnName="Form_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Field_template">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Field_template">
+        <MappingFragment StoreEntitySet="Field_template">
+          <ScalarProperty Name="Field_id" ColumnName="Field_id" />
+          <ScalarProperty Name="Form_template_id" ColumnName="Form_template_id" />
+          <ScalarProperty Name="Field_title" ColumnName="Field_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+          <ScalarProperty Name="Leader_id" ColumnName="Leader_id" />
+          <ScalarProperty Name="Supervisor_name" ColumnName="Supervisor_name" />
+          <ScalarProperty Name="Cosupervisor_name" ColumnName="Cosupervisor_name" />
+          <ScalarProperty Name="Project_title" ColumnName="Project_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Student_id" ColumnName="Student_id" />
+          <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+          <ScalarProperty Name="Student_email" ColumnName="Student_email" />
+          <ScalarProperty Name="Student_name" ColumnName="Student_name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teacher">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Teacher">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="Teacher_id" ColumnName="Teacher_id" />
+          <ScalarProperty Name="Teacher_email" ColumnName="Teacher_email" />
+          <ScalarProperty Name="Teacher_name" ColumnName="Teacher_name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Template_form">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Template_form">
+        <MappingFragment StoreEntitySet="Template_form">
+          <ScalarProperty Name="Project_no" ColumnName="Project_no" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="Form_id" ColumnName="Form_id" />
+          <ScalarProperty Name="Form_weightage" ColumnName="Form_weightage" />
+          <ScalarProperty Name="Form_title" ColumnName="Form_title" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Campus" ColumnName="Campus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Criteria_marks">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Criteria_marks">
+        <MappingFragment StoreEntitySet="Criteria_marks">
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="Form_id" ColumnName="Form_id" />
+          <ScalarProperty Name="Criteria_template_id" ColumnName="Criteria_template_id" />
+          <ScalarProperty Name="Student_id" ColumnName="Student_id" />
+          <ScalarProperty Name="Obtained_marks" ColumnName="Obtained_marks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Field_text">
+      <EntityTypeMapping TypeName="MyFirstDBModel.Field_text">
+        <MappingFragment StoreEntitySet="Field_text">
+          <ScalarProperty Name="FID" ColumnName="FID" />
+          <ScalarProperty Name="Form_id" ColumnName="Form_id" />
+          <ScalarProperty Name="Field_template_id" ColumnName="Field_template_id" />
+          <ScalarProperty Name="Field_text1" ColumnName="Field_text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

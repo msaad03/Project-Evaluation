@@ -1,0 +1,61 @@
+﻿@model FypEvaluationSystem.Models.JuryLogin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Html.Partial("_CssLinks")
+    <style>
+
+
+        .custom {
+            background: white;
+            box-shadow: 10px 10px 8px 8px #5F5C5C;
+            border: 3px solid green;
+            padding: 10px;
+            position: absolute;
+            width: 50%;
+            top: 20%;
+            left: 25%;
+        }
+
+        body {
+            background: #E8FAFE;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container text-center border p-5 custom">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <h4 class="mt-4">Jury Login</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group mt-5">
+                @Html.EditorFor(model => model.Teacher_email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter email" } })
+                @Html.ValidationMessageFor(model => model.Teacher_email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mt-4">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Enter Password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Login" class="btn btn-primary btn-block" />
+            </div>
+        }
+    </div>
+
+    @Html.Partial("_JsLinks")
+</body>
+</html>

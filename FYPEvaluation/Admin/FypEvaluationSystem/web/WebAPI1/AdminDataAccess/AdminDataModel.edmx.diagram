@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb9d0ae92ac041929907f2ea78eee598" Name="Diagram1">
+        <EntityTypeShape EntityType="MyFirstDBModel.Admin" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Criteria_template" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Evaluated_form" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Field_template" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Group" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Student" Width="1.5" PointX="1.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Teacher" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Template_form" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Criteria_marks" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyFirstDBModel.Field_text" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Criteria_marks_Criteria_template" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Criteria_template_Template_form" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Criteria_marks_Evaluated_form" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Evaluated_form_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Evaluated_form_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Evaluated_form_Teacher1" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Evaluated_form_Template_form" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Field_text_Evaluated_form" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Field_template_Template_form" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Field_text_Field_template" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Group_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Student_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Criteria_marks_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="MyFirstDBModel.FK_Field_text_Student" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+
+@using (Html.BeginForm("Import", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group mt-5 pt-5 w-75">
+        @Html.Label("Import for:")
+        @Html.DropDownList("staff",
+                 new SelectList(
+                     new List<Object>{
+                   new { value = "Teacher" , text = "Teacher"},
+                   new { value = "Student" , text = "Student"},
+
+
+                      }, "value", "text", "false"),
+                 new { @class = "form-control" })
+    </div>
+
+    <div class="custom-file mb-3 w-75">
+        @Html.TextBox("UploadFile", "", new { @class = "custom-file-input", id = "customFile", name = "filename", type = "file" })
+        <label class="custom-file-label" for="customFile">Choose file</label>
+        @if (ViewBag.Error != null)
+        {
+            <div class="text-danger">
+                <small>@ViewBag.Error</small>
+            </div>
+        }
+        else if (ViewBag.SuccessMessage != null)
+        {
+            <div class="text-success">
+                <small>@ViewBag.SuccessMessage</small>
+            </div>
+        }
+    </div>
+
+
+    <div class="mt-4">
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+
+}
+<script src="~/Scripts/Custom/jquery-3.4.1.min.js"></script>
+<script>
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

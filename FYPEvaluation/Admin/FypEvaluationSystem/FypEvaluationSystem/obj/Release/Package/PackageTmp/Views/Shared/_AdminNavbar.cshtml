@@ -1,0 +1,46 @@
+﻿@using FypEvaluationSystem.ViewModel;
+@using FypEvaluationSystem.Models;
+<style>
+
+    .activeLink {
+        text-decoration: dashed;
+        background: red;
+    }
+</style>
+@{
+    var Link = ViewContext.RouteData.Values["Action"].ToString();
+}
+<div class="border-right full-height" id="sidebar-wrapper">
+    @if (User.Identity.IsAuthenticated)
+    {
+        var name = User.Identity.Name.Substring(0, User.Identity.Name.LastIndexOf("@"));
+        <h3 class="text-center mt-4 text-white">@name</h3>
+    }
+    <ul class="list-group mt-5 text-white">
+        <li href="" id="nav-1" class="mt-4 py-2 @( Link == "Index" || Link == "DisplayForm"   ? "activeLink" : "")">
+            <i class="fa fa-bar-chart ml-4"></i>&nbsp;
+            @Html.ActionLink("Dashboard", "Index", "Admin", new { @class = "text-white navLink" })
+        </li>
+        <li href="" id="nav-2" class="mt-4 py-2 @( Link=="Edit" || Link == "AddForm" || Link == "FormInfo" ? "activeLink" : "")">
+            <i class="fa fa-wpforms ml-4"></i>&nbsp;
+            @Html.ActionLink("Add Form", "AddForm", "Admin", new { @class = "text-white navLink" })
+        </li>
+        <li href="" id="nav-3" class="mt-4 py-2 @(Link == "ViewForms" || Link == "FormDesign" ? "activeLink" : "")">
+            <i class="fa fa-sticky-note ml-4"></i>&nbsp;
+            @Html.ActionLink("Existing Forms", "ViewForms", "Admin", new { @class = "text-white navLink" })
+        </li>
+        <li href="" id="nav-4" class="mt-4 py-2 @(Link == "SubmittedForms" || Link== "FormData" ? "activeLink" : "")">
+            <i class="fa fa-address-book ml-4"></i>&nbsp;
+            @Html.ActionLink("Evaluated Forms", "SubmittedForms", "Admin", new { @class = "text-white navLink" })
+        </li>
+        <li href="" id="nav-5" class="mt-4 py-2 @(Link == "ViewStudents" || Link == "ViewStudentInfo" ? "activeLink" : "")">
+            <i class="fa fa-eye ml-4"></i>&nbsp;
+            @Html.ActionLink("View Students", "ViewStudents", "Admin", new { @class = "text-white navLink" })
+        </li>
+        <li href="" id="nav-6" class="mt-4 py-2 @(Link == "Import" ? "activeLink" : "")">
+            <i class="fa fa-upload ml-4"></i>&nbsp;
+            @Html.ActionLink("Import", "Import", "Admin", new { @class = "text-white navLink" })
+        </li>
+
+    </ul>
+</div>

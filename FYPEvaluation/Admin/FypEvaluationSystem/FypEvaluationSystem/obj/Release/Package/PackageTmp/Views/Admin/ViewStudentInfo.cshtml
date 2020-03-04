@@ -1,0 +1,61 @@
+﻿@model FypEvaluationSystem.Models.GroupInfo
+
+@{
+    ViewBag.Title = "ViewStudentInfo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+
+
+
+
+    <div class="container mt-5 pt-3">
+        <h2>Group Information</h2>
+        <div class="row d-flex justify-content-around mt-4">
+            <b>@Html.DisplayNameFor(model => model.Supervisor_name)</b>
+            @Html.DisplayFor(model => model.Supervisor_name)
+        </div>
+
+        @if (Model.Cosupervisor_name != null)
+        {
+            <hr />
+            <div class="row d-flex justify-content-around">
+                <b>@Html.DisplayNameFor(model => model.Cosupervisor_name)</b>
+                @Html.DisplayFor(model => model.Cosupervisor_name)
+            </div>
+        }
+        <hr />
+        <div class="row d-flex justify-content-around">
+            <b>@Html.DisplayNameFor(model => model.Leader_id)</b>
+            @Html.DisplayFor(model => model.Leader_id)
+        </div>
+        <hr />
+        <div class="row d-flex justify-content-around">
+            <b>@Html.DisplayNameFor(model => model.Project_title)</b>
+            @Html.DisplayFor(model => model.Project_title)
+        </div>
+
+        <h4 class="mt-5 mb-4">Member Information</h4>
+
+        @foreach (var elem in Model.Student_list)
+        {
+            <div class="row d-flex justify-content-around">
+                <b>Student ID</b>
+                @elem.Student_id
+            </div>
+            <div class="row d-flex justify-content-around">
+                <b>Student Name</b>
+                @elem.Student_name
+            </div>
+            <div class="row d-flex justify-content-around">
+                <b>Student Email</b>
+                @elem.Student_email
+            </div>
+            <hr />
+        }
+
+    </div>
+
+

@@ -1,0 +1,40 @@
+﻿@using FypEvaluationSystem.Models
+@{
+    ViewBag.Title = "DisplayForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Evaluated_form> data = ViewBag.forms;
+}
+
+
+<div class="container mb-3 mt-5">
+    <h4>Submitted Form</h4>
+    <div class="table-responsive mt-4">
+        <table id="mydatatable" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Evaluation</th>
+                    <th>Project Title</th>
+                    <th>Supervisor</th>
+                    <th>Leader ID</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < data.Count; i++)
+                {
+                <tr>
+                    <td>@data[i].Form_title</td>
+                    <td>@data[i].Project_title</td>
+                    <td>@data[i].Supervisor_name</td>
+                    <td>@data[i].Leader_id</td>
+                    <td>@data[i].Form_status</td>
+                    <td><a href="/Home/FormData?Form_id=@data[i].Form_id" class="view-form" id=@data[i].Form_id>view form</a></td>
+                    @*<td><a href="">View Form</a></td>*@
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

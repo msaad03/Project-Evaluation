@@ -1,0 +1,31 @@
+﻿<style>
+    .activeLink {
+        text-decoration: dashed;
+        background: red;
+    }
+</style>
+@{
+    var Link = ViewContext.RouteData.Values["Action"].ToString();
+}
+<div class="border-right full-height" id="sidebar-wrapper">
+    @if (User.Identity.IsAuthenticated)
+    {
+        // @User.Identity.Name
+        //var name = User.Identity.Name.Substring(0, User.Identity.Name.LastIndexOf("@"));
+        <h3 class="text-center mt-4 text-white">Jury Portal</h3>
+    }
+    <ul class="list-group mt-5 text-white">
+        <li href="" class="mt-4 py-2 @(Link == "Index" || Link == "StudentForm" ? "activeLink" : "")">
+            <i class="fa fa-bookmark text-white ml-4"></i>&nbsp;
+            @Html.ActionLink("Forms", "Index", "Home", new { @class = "text-white" })
+        </li>
+        <li href="" class="mt-4 py-2 @( Link == "SubmittedForms" || Link == "FormDesign" || Link=="FormData" ? "activeLink" : "")">
+            <i class="fa fa-wpforms text-white ml-4"></i>&nbsp;
+            @Html.ActionLink("Submitted Forms", "SubmittedForms", "Home", new { @class = "text-white" })
+        </li>
+        <li href="" class="mt-4 py-2 @( Link == "Statistics" ? "activeLink" : "")">
+            <i class="fa fa-bar-chart text-white ml-4"></i>&nbsp;
+            @Html.ActionLink("Statistics", "Statistics", "Home", new { @class = "text-white" })
+        </li>
+    </ul>
+</div>

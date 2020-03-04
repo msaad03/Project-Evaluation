@@ -1,0 +1,211 @@
+﻿@using FypEvaluationSystem.Models
+@model FypEvaluationSystem.Models.PreFormInfo
+@{
+    ViewBag.Title = "AddForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    AddFields field;
+    if (ViewBag.AddField != null)
+    {
+        field = ViewBag.AddField;
+    }
+
+}
+<div class="container pt-4">
+    @using (Html.BeginForm("FormInfo", "Admin", FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (Model != null)
+            {
+
+                <div class="form-group mt-5">
+                    @Html.LabelFor(model => model.Campus)
+                    @Html.DropDownListFor(model => model.Campus,
+                            new SelectList(
+                                new List<Object>{
+                               new { value = "Karachi" , text = "Karachi", selected = Model.Campus!= null && Model.Campus == "Karachi"? true : false  },
+                               new { value = "Lahore" , text = "Lahore", selected = Model.Campus!= null && Model.Campus == "Lahore"? true : false  },
+                               new { value = "Peshawar" , text = "Peshawar",selected = Model.Campus!= null && Model.Campus == "Peshawar"? true : false  },
+                               new { value = "Islamabad" , text = "Islamabad",selected = Model.Campus!= null && Model.Campus == "Karachi"? true : false  },
+                               new { value = "Faisalabad" , text = "Faislabad",selected = Model.Campus!= null && Model.Campus == "Faislabad"? true : false  },
+
+
+                                 }, "value", "text", "false"),
+                            new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Campus, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+
+                <div class="form-group mt-5">
+                    @Html.LabelFor(model => model.Campus)
+                    @Html.DropDownListFor(model => model.Campus,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "Karachi" , text = "Karachi"},
+                               new { value = "Lahore" , text = "Lahore"},
+                               new { value = "Peshawar" , text = "Peshawar"},
+                               new { value = "Islamabad" , text = "Islamabad"},
+                               new { value = "Faisalabad" , text = "Faislabad"},
+
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Campus, "", new { @class = "text-danger" })
+                </div>
+            }
+            @if (Model != null)
+            {
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Department)
+                    @Html.DropDownListFor(model => model.Department,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "CS" , text = "CS",selected = Model.Department == "CS"? true : false  },
+                               new { value = "SE" , text = "SE",selected = Model.Department == "SE"? true : false  },
+                               new { value = "BBA" , text = "BBA",selected = Model.Department == "BBA"? true : false  },
+                               new { value = "EE" , text = "EE",selected = Model.Department == "EE"? true : false }
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Department)
+                    @Html.DropDownListFor(model => model.Department,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "CS" , text = "CS"},
+                               new { value = "SE" , text = "SE"},
+                               new { value = "BBA" , text = "BBA"},
+                               new { value = "EE" , text = "EE"}
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+            }
+            @if (Model != null)
+            {
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Project)
+                    @Html.DropDownListFor(model => model.Project,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "1" , text = "1" ,selected = Model.Project == "1"? true : false },
+                               new { value = "2" , text = "2" ,selected = Model.Project == "2"? true : false },
+                               new { value = "-" , text = "-" ,selected = Model.Project == "-"? true : false }
+
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Project, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Project)
+                    @Html.DropDownListFor(model => model.Project,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "1" , text = "1"},
+                               new { value = "2" , text = "2"},
+                               new { value = "-" , text = "-"}
+
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Project, "", new { @class = "text-danger" })
+                </div>
+            }
+            @if (Model != null)
+            {
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Semester)
+                    @Html.DropDownListFor(model => model.Semester,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "Fall" , text = "Fall" ,selected = Model.Semester == "Fall"? true : false },
+                               new { value = "Spring" , text = "Spring" ,selected = Model.Semester == "Spring"? true : false },
+                               new { value = "Summer" , text = "Summer" ,selected = Model.Semester == "Summer"? true : false },
+
+
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Semester, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Semester)
+                    @Html.DropDownListFor(model => model.Semester,
+                       new SelectList(
+                           new List<Object>{
+                               new { value = "Fall" , text = "Fall"},
+                               new { value = "Spring" , text = "Spring"},
+                               new { value = "Summer" , text = "Summer"}
+
+
+
+                            }, "value", "text", "false"),
+                       new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Semester, "", new { @class = "text-danger" })
+                </div>
+            }
+            @if (Model != null)
+            {
+
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Year)
+                    @Html.TextBoxFor(model => model.Year, new { @class = "form-control", @placeholder = "Enter Year", value = Model.Year })
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Year)
+                    @Html.TextBoxFor(model => model.Year, new { @class = "form-control", @placeholder = "Enter Year" })
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            }
+            @if (Model != null)
+            {
+
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.TotalMarks)
+                    @Html.TextBoxFor(model => model.TotalMarks, new { @class = "form-control", @placeholder = "Enter Form Weightage", value = Model.TotalMarks })
+                    @Html.ValidationMessageFor(model => model.TotalMarks, "", new { @class = "text-danger" })
+                </div>
+            }
+            else
+            {
+
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.TotalMarks)
+                    @Html.TextBoxFor(model => model.TotalMarks, new { @class = "form-control", @placeholder = "Enter Form Weightage" })
+                    @Html.ValidationMessageFor(model => model.TotalMarks, "", new { @class = "text-danger" })
+                </div>
+            }
+
+            <input class="btn btn-success mt-2 float-right" type="submit" value="Next" />
+        </div>
+    }
+</div>

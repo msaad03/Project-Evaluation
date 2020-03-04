@@ -1,0 +1,255 @@
+﻿@using FypEvaluationSystem.Models;
+
+@{ 
+
+    Existing_form formInfo = this.ViewData.ContainsKey("FormInfo") ? (Existing_form)this.ViewData["FormInfo"] : null;
+    bool Disabled = this.ViewData.ContainsKey("Disabled") ? (bool)this.ViewData["Disabled"] : false;
+
+    string criteria = "";
+    string ass_fields = "";
+ 
+    foreach (var x in formInfo.criteria_template)
+    {
+        criteria += x.Criteria_title + "," + x.Total_marks + "\r\n";
+    }
+   
+    foreach (var x in formInfo.field_template)
+    {
+        ass_fields += x.Field_title + ",";
+    }
+
+}
+
+<style>
+    .form-design {
+        border: none;
+        border-bottom: 1px solid #615F5F;
+    }
+
+    .border {
+        box-shadow: 2px 8px 8px 8px #615F5F;
+    }
+
+    .custom {
+        width: 200%;
+    }
+</style>
+
+<div class="container">
+
+    <div class="border mt-5 p-3 mb-3" id="print-content">
+
+        <h4 class="text-center">National University of Computer and Emerging Sciences (@formInfo.Campus Campus)</h4>
+        @*<h4 class="text-center">CS491 Project-@formInfo.preFormInfo.Project</h4>*@
+
+        <div class="d-flex justify-content-between mt-2">
+            <div class="ml-5">
+                <img src="~/Content/images/fastlogo.png" class="logo" style="height:130px;" alt="fast logo" />
+            </div>
+            <div class="mr-5">
+                <img src="~/Content/images/nulogo.png" class="logo" style="height:130px;" alt="nu logo" />
+            </div>
+        </div>
+
+        <div class="text-center">
+            <h5>@formInfo.Form_title</h5>
+        </div>
+
+        <div class="form-group d-flex mt-4">
+            <label class="mr-2">Project&nbsp;Title</label>
+            @if (Disabled)
+            {
+                <input class="form-control form-design" type="text" value="" disabled>
+            }
+            else
+            {
+                <input class="form-control form-design" type="text" value="">
+            }
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <div class="form-group d-flex custom">
+                <label class="mr-2">Group&nbsp;Leader&nbsp;ID</label>
+                @if (Disabled)
+                {
+
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="" />
+                }
+            </div>
+            <div class="form-group d-flex custom">
+                <label class="mr-2">Group&nbsp;Leader&nbsp;Name</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="">
+                }
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div class="form-group d-flex custom">
+                <label class="mr-2">Supervisor</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+                    <input class="form-control form-design" type="text" value="" />
+                }
+
+            </div>
+            <div class="form-group d-flex custom">
+                <label class="mr-2">CoSupervisor</label>
+                @if (Disabled)
+                {
+                    <input class="form-control form-design" type="text" value="" disabled>
+                }
+                else
+                {
+
+                    <input class="form-control form-design" type="text" value="" />
+                }
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <div class="form-check-inline">
+                <label class="form-check-label" for="radio1">
+                    <input type="radio" class="form-check-input" id="accepted" name="optradio" value="Accepted" checked>Accepted
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label" for="radio2">
+                    <input type="radio" class="form-check-input" id="accepeted-with-changes" name="optradio" value="Accepted with Changes">Accepted With Changes
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label"  for="radio3">
+                    <input type="radio" class="form-check-input" id="rejected" name="optradio" value="Rejected">Rejected
+                </label>
+            </div>
+        </div>
+
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Assesment Criteria</th>
+                        <th>Member 1</th>
+                        <th>Member 2</th>
+                        <th>Member 3</th>
+                        <th>Criteria Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in formInfo.criteria_template)
+                    {
+                    <tr>
+                        <td>@item.Criteria_title</td>
+                        <td>
+                            <div class="form-group">
+                                @if (Disabled)
+                                {
+
+                                    <input class="form-control form-design" type="text" value="" disabled>
+                                }
+                                else
+                                {
+
+                                    <input class="form-control form-design" type="text" value="">
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @if (Disabled)
+                                {
+                                    <input class="form-control form-design" type="text" value="" disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-control form-design" type="text" value="" />
+                                }
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @if (Disabled)
+                                {
+                                    <input class="form-control form-design" type="text" value="" disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-control form-design" type="text" value="" />
+                                }
+
+                            </div>
+                        </td>
+                        <td>@item.Total_marks</td>
+                    </tr>
+                    }
+
+                    @*<tr class="text-right" style="font-size:13px;">
+                        <td>Total Marks</td>
+                        @foreach (var item in formInfo.criteria_template)
+                        {
+                            <td>@item.Total_marks</td>
+                        }
+                    </tr>*@
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group mt-4">
+            @foreach (var item in formInfo.field_template)
+            {
+                <label for="comment">@item.Field_title</label>
+                if (Disabled)
+                {
+                    <textarea class="form-control" rows="1" id="comment" disabled></textarea>
+                }
+                else
+                {
+                    <textarea class="form-control" rows="2" id="comment"></textarea>
+                }
+            }
+            </div>
+
+        <div class="form-group d-flex mt-5">
+            <label class="mr-2">Evaluator&nbsp;name&nbsp;&&nbsp;signature</label>
+            @if (Disabled)
+            {
+                <input class="form-control form-design" type="text" value="" disabled>
+            }
+            else
+            {
+                <input class="form-control form-design" type="text" value="" />
+            }
+
+        </div>
+        <div class="form-group d-flex mt-4">
+            <label class="mr-2">Supervisor&nbsp;Comment&nbsp;&&nbsp;signature</label>
+            @if (Disabled)
+            {
+                <input class="form-control form-design" type="text" value="" disabled>
+            }
+            else
+            {
+                <input class="form-control form-design" type="text" value="" />
+
+            }
+
+        </div>
+    </div>
+
+    <button class="btn btn-warning mt-4">@Html.ActionLink("Edit", "Edit", "Admin", new { formInfo.Campus, formInfo.Department, formInfo.Form_weightage, formInfo.Form_id, formInfo.Form_title, criteria, ass_fields, Disabled= Disabled }, new { @class="text-white"})</button>
+    <button class="btn btn-primary float-right mt-4" id="print-button">Print</button>
+</div>

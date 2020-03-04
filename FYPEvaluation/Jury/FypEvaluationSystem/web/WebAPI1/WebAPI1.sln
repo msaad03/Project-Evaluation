@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI1", "WebAPI1\WebAPI1.csproj", "{A47E91F9-57DF-4F2B-A654-A4C691B8C211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminDataAccess", "AdminDataAccess\AdminDataAccess.csproj", "{88B56B97-61F6-4481-9A97-F48BA83CB0AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A47E91F9-57DF-4F2B-A654-A4C691B8C211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47E91F9-57DF-4F2B-A654-A4C691B8C211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47E91F9-57DF-4F2B-A654-A4C691B8C211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47E91F9-57DF-4F2B-A654-A4C691B8C211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B56B97-61F6-4481-9A97-F48BA83CB0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B56B97-61F6-4481-9A97-F48BA83CB0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B56B97-61F6-4481-9A97-F48BA83CB0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B56B97-61F6-4481-9A97-F48BA83CB0AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {822F284D-F6A9-4D47-A5EA-097651E45C9F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/k163807
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AdminDataAccess\\AdminDataAccess.csproj
+		SccProjectName1 = AdminDataAccess
+		SccLocalPath1 = AdminDataAccess
+		SccProjectUniqueName2 = WebAPI1\\WebAPI1.csproj
+		SccProjectName2 = WebAPI1
+		SccLocalPath2 = WebAPI1
+	EndGlobalSection
+EndGlobal

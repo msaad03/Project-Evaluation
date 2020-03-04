@@ -1,0 +1,48 @@
+﻿@{
+
+    string FormTitle = this.ViewData.ContainsKey("FormTitle") ? (string)this.ViewData["FormTitle"] : "Title";
+    int FormID = this.ViewData.ContainsKey("FormID") ? (int)this.ViewData["FormID"] : -1;
+}
+<a href="#" id=@FormID class="text-dark title-link">@FormTitle</a>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Enter Student id</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                @using (Html.BeginForm("StudentForm", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.TextBox("StudentID", "", new { @class = "form-control", id = "StudentID", placeholder = "Enter Studnet ID" })
+                        @Html.TextBox("FormID", "", new { @class = "form-control FORMID", id = "Form" + FormID, style = "display:none;" })
+
+                    </div>
+                    <button type="submit" class="btn btn-success float-right">Go</button>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+    $('.title-link').click(function () {
+
+        var ID = $(this).attr('id');
+        var valID = "Form" + ID;
+        $('.FORMID').val(ID);
+        $('#myModal').modal('show');
+
+    })
+</script>

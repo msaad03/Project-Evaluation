@@ -1,0 +1,176 @@
+﻿@model FypEvaluationSystem.Models.AddFields
+@using System.Web.UI.WebControls
+@{
+    ViewBag.Title = "FormInfo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var prev = ViewBag.Pre;
+
+
+}
+
+<div class="container mt-5">
+    @if (prev != null)
+    {
+        <table class="" width="200">
+            <tr><td><small>Previous Selection</small></td></tr>
+            <tr>
+                <td><small>Campus</small></td>
+                <td><small>@prev.Campus</small></td>
+            </tr>
+            <tr>
+                <td><small>Department</small></td>
+                <td><small>@prev.Department</small></td>
+            </tr>
+            <tr>
+                <td><small>Project</small></td>
+                <td><small>@prev.Project</small></td>
+            </tr>
+            <tr>
+                <td><small>Semester</small></td>
+                <td><small>@prev.Semester</small></td>
+            </tr>
+            <tr>
+                <td><small>Year</small></td>
+                <td><small>@prev.Year</small></td>
+            </tr>
+            <tr>
+                <td><small>Total weightage</small></td>
+                <td><small>@prev.TotalMarks</small></td>
+            </tr>
+        </table>
+    }
+    @using (Html.BeginForm("ViewForms", "Admin", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        if (Model != null)
+        {
+
+            <div class="form-group mt-5">
+                <label for="">Form Title</label>
+                @Html.TextBoxFor(model => model.FormTitle, new { @class = "form-control", @placeholder = "Enter form Title", value = Model.FormTitle })
+                @Html.ValidationMessageFor(model => model.FormTitle, "", new { @class = "text-danger" })
+            </div>
+        }
+        else
+        {
+
+
+            <div class="form-group mt-5">
+                <label for="">Form Title</label>
+                @Html.TextBoxFor(model => model.FormTitle, new { @class = "form-control", @placeholder = "Enter form Title" })
+                @Html.ValidationMessageFor(model => model.FormTitle, "", new { @class = "text-danger" })
+            </div>
+        }
+
+        if (Model != null)
+        {
+
+            <div class="form-group mt-5">
+                @Html.TextAreaFor(model => model.Hidden, new { @class = "form-control", id = "hidden-text-box", value = Model.Hidden, style = "display: none;" })
+                @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+            </div>
+        }
+        else
+        {
+
+            <div class="form-group mt-5">
+                @Html.TextAreaFor(model => model.Hidden, new { @class = "form-control", id = "hidden-text-box", value = "", style = "display: none;" })
+                @Html.ValidationMessageFor(model => model.Hidden, "", new { @class = "text-danger" })
+            </div>
+
+        }
+        if (Model != null)
+        {
+
+            <div class="form-group mt-5">
+                @Html.TextAreaFor(model => model.Hidden2, new { @class = "form-control", id = "hidden-text-box-2", value = Model.Hidden2, style = "display: none;" })
+                @Html.ValidationMessageFor(model => model.Hidden2, "", new { @class = "text-danger" })
+            </div>
+        }
+        else
+        {
+
+            <div class="form-group mt-5">
+                @Html.TextAreaFor(model => model.Hidden2, new { @class = "form-control", id = "hidden-text-box-2", value = "", style = "display: none;" })
+                @Html.ValidationMessageFor(model => model.Hidden2, "", new { @class = "text-danger" })
+            </div>
+
+        }
+
+        <div class="form-group mt-5">
+            <label for="">Add Assesment Criteria</label>
+            @Html.Partial("_AssesmentModal")
+            @if (Model != null)
+            {
+                var i = 0;
+                <div class="container w-50 text-center">
+                    <table class="table" id="dynamic_field">
+                        @foreach (var elem in Model.AssesmentCriteria)
+                        {
+
+                            var id = "row" + i;
+                            <tr id=@id>
+                                <td name="name[]" id="name" class="name_list">@elem.Field</td>
+                                <td>@elem.Marks</td>
+                                <td>
+                                    <button id=@i name="remove" class="btn btn-danger btn_remove float-right">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </table>
+                </div>
+
+
+            }
+            else
+            {
+
+                <div class="container w-50 text-center">
+                    <table class="table" id="dynamic_field"></table>
+                </div>
+
+            }
+        </div>
+
+
+
+        <div class="form-group mt-5">
+            <label for="">Add Fields</label>
+            @Html.Partial("_FieldModal")
+            @if (Model != null)
+            {
+                var i = 0;
+                <div class="container w-50 text-center">
+                    <table class="table" id="dynamic_field_2">
+                        @foreach (var elem in Model.Fields)
+                        {
+                            var id = "row_2" + i;
+                            <tr id=@id>
+                                <td name="name[]" id="name" class="name_list">@elem</td>
+                                <td>
+                                    <button id=@i name="remove" class="btn btn-danger btn_remove_2 float-right">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="container w-50 text-center">
+                    <table class="table" id="dynamic_field_2"></table>
+                </div>
+            }
+        </div>
+
+        <button class="btn btn-primary float-right mt-5" id="create-form" type="submit" style="border-radius:20px">Create Form</button>
+    }
+</div>

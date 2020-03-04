@@ -1,0 +1,187 @@
+﻿@using FypEvaluationSystem.Models;
+
+@{
+    ViewBag.Title = "FormDesign";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var form = (Evaluated_form)ViewBag.Forms;
+
+    int totalStudents = form.criteria_marks.Count / form.criteria_template.Count;
+
+    var className = "";
+
+}
+
+<style>
+    .form-design {
+        border: none;
+        border-bottom: 1px solid #615F5F;
+    }
+
+    .border {
+        box-shadow: 2px 8px 8px 8px #615F5F;
+    }
+
+    .custom {
+        width: 200%;
+    }
+</style>
+
+<div class="container">
+
+    <div class="border mt-5 p-3 mb-3 demo" id="print-content">
+
+        <h4 class="text-center">National University of Computer and Emerging Sciences (@form.Campus Campus)</h4>
+        <h5 class="text-center">CS491 Project @form.Project_no</h5>
+        <h5 class="text-center">BS (@form.Department) Fall @form.Year</h5>
+        <div class="d-flex justify-content-between mt-2">
+            <div class="ml-5">
+                <img src="~/Content/images/fastlogo.png" id="logo1" class="logo" style="height:130px;" alt="fast logo" />
+            </div>
+            <div class="mr-5">
+                <img src="~/Content/images/nulogo.png" id="logo2" class="logo" style="height:130px;" alt="nu logo" />
+            </div>
+        </div>
+
+        <div class="text-center">
+            <h5>@form.Form_title</h5>
+        </div>
+
+        <div class="form-group d-flex mt-4">
+            <label class="mr-2">Project&nbsp;Title</label>
+            <input class="form-control form-design" type="text" value="@form.Project_title" disabled>
+
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+            <div class="form-group d-flex custom">
+                <label class="mr-2">Group&nbsp;Leader&nbsp;ID</label>
+                <input class="form-control form-design" type="text" value="@form.Leader_id" disabled>
+
+            </div>
+            <div class="form-group d-flex custom">
+                <label class="mr-2">Group&nbsp;Leader&nbsp;Name</label>
+                <input class="form-control form-design" type="text" value="@form.Leader_name" disabled>
+
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <div class="form-group d-flex custom">
+                <label class="mr-2">Supervisor</label>
+                <input class="form-control form-design" type="text" value="@form.Supervisor_name" disabled>
+
+
+            </div>
+            <div class="form-group d-flex custom">
+                <label class="mr-2">CoSupervisor</label>
+                <input class="form-control form-design" type="text" value="@form.Cosupervisor_name" disabled>
+
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+
+            @if (form.Form_status.Equals("Accepted"))
+            {
+                className = "text-success";
+            }
+            else if (form.Form_status.Equals("Accepted With Changes"))
+            {
+                className = "text-warning";
+            }
+            else
+            {
+                className = "text-danger";
+
+            }
+
+            <div>
+                <label>Status: </label>
+                <span class="@className">@form.Form_status</span>
+            </div>
+        </div>
+
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered">
+                <thead>
+
+                    <tr>
+                        <th>Assesment Criteria</th>
+
+                        @for (int i = 0; i < form.criteria_marks.Count; i += form.criteria_template.Count)
+                        {
+                            <th>@form.criteria_marks[i].Student_id</th>
+                        }
+                        <th>Criteria Marks</th>
+                </thead>
+                <tbody>
+
+                    @for (int j = 0; j < form.criteria_template.Count; j++)
+                    {
+                        <tr>
+                            <td>@form.criteria_template[j].Criteria_title</td>
+
+                            @for (var i = j; i < form.criteria_marks.Count; i += form.criteria_template.Count)
+                            {
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control form-design" type="text" value="@form.criteria_marks[i].Obtained_marks" disabled>
+                                    </div>
+                                </td>
+                            }
+
+                            <td>@form.criteria_template[j].Total_marks</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group mt-4">
+            @for (int i = 0; i < form.field_template.Count; i++)
+            {
+                <label for="comment">@form.field_template[i].Field_title</label>
+                <textarea class="form-control" rows="1" id="comment" disabled>@form.field_text[i].Field_text1</textarea>
+
+            }
+        </div>
+
+        <div class="form-group d-flex mt-5">
+            <label class="mr-2">Evaluator&nbsp;name&nbsp;&&nbsp;signature</label>
+            <input class="form-control form-design" type="text" value="" disabled>
+        </div>
+        <div class="form-group d-flex mt-4">
+            <label class="mr-2">Supervisor&nbsp;Comment&nbsp;&&nbsp;signature</label>
+            <input class="form-control form-design" type="text" value="" disabled>
+
+
+        </div>
+    </div>
+
+    <button class="btn btn-primary float-right mt-4" onclick="myFunction()">Print</button>
+
+</div>
+
+
+
+
+<script>
+    function myFunction() {
+        var prtContent = document.getElementById("print-content");
+        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write(prtContent.innerHTML);
+
+        WinPrint.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">');
+        WinPrint.document.write('<link href="~/Content/CustomCss/Custom.css" rel="stylesheet" type="text/css" />');
+        WinPrint.document.write('<link href="~/Content/font-awesome.css" rel="stylesheet" />');
+        WinPrint.document.write('<script src="~/Scripts/modernizr-2.8.3.js"><\/script>');
+        WinPrint.document.write('<link href="~/Content/CustomCss/Custom.css" rel="stylesheet" />');
+
+
+        WinPrint.document.close();
+        WinPrint.focus();
+        WinPrint.print();
+        WinPrint.close();
+    }
+</script>

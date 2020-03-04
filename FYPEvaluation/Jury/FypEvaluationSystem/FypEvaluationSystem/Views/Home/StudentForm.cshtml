@@ -1,0 +1,161 @@
+﻿@using FypEvaluationSystem.Models
+@model FypEvaluationSystem.Models.Group
+@{
+    ViewBag.Title = "StudentForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Existing_form form = ViewBag.form;
+}
+
+<style>
+    .form-design {
+        border: none;
+        border-bottom: 1px solid #615F5F;
+    }
+
+    .border {
+        box-shadow: 2px 8px 8px 8px #615F5F;
+    }
+
+    .custom {
+        width: 200%;
+    }
+</style>
+
+
+@if (Model != null)
+{
+
+
+    using(Html.BeginForm("EvaluateForm", "Home", FormMethod.Post)) { 
+    <div class="container">
+
+        <div class="border mt-5 p-3 mb-3" id="print-content">
+
+            <h4 class="text-center">National University of Computer and Emerging Sciences (@form.Campus Campus)</h4>
+            <h5 class="text-center">CS491 Project @form.Project_no</h5>
+            <h5 class="text-center">BS (@form.Department) Fall @form.Year</h5>
+            <div class="d-flex justify-content-between mt-2">
+                <div class="ml-5">
+                    <img src="~/Content/images/fastlogo.png" class="logo" style="height:130px;" alt="fast logo" />
+                </div>
+                <div class="mr-5">
+                    <img src="~/Content/images/nulogo.png" class="logo" style="height:130px;" alt="nu logo" />
+                </div>
+            </div>
+            <div class="text-center">
+                <h4>@form.Form_title</h4>
+            </div>
+            <div class="form-group d-flex mt-3">
+                <label class="mr-2">Project&nbsp;Title</label>
+                <input class="form-control form-design" type="text" value="@Model.ProjectTitle" />
+            </div>
+            <div class="d-flex justify-content-around">
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Group&nbsp;Leader&nbsp;ID</label>
+                    <input class="form-control form-design" type="text" value=@Model.LeaderId />
+                </div>
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Group&nbsp;Leader&nbsp;Name</label>
+                    <input class="form-control form-design" type="text" value=@Model.members[0].Name />
+                </div>
+            </div>
+            <div class="d-flex justify-content-around">
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">Supervisor</label>
+                    <input class="form-control form-design" type="text" value="@Model.Supervisor" />
+                </div>
+                <div class="form-group d-flex custom">
+                    <label class="mr-2">CoSupervisor</label>
+                    <input class="form-control form-design" type="text" value="@Model.CoSupervisor" />
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio1">
+                        @Html.RadioButton("optradio", "Accepted", true, new { type = "radio", @class = "form-check-input", id = "accepted", name = "optradio" })
+                        Accepted
+                        @*<input type="radio" class="form-check-input" id="accepted" name="optradio" value="Accpeted" checked>*@
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio2">
+                        @Html.RadioButton("optradio", "Accepted With Changes", false, new { type = "radio", @class = "form-check-input", id = "accepted-with-changes", name = "optradio" })
+                        Accepted With Changes
+                        @*<input type="radio" class="form-check-input" id="accepeted-with-changes" name="optradio" value="Accpeted with Changes">Accepted With Changes*@
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        @Html.RadioButton("optradio", "Rejected", false, new { type = "radio", @class = "form-check-input", id = "rejected" })
+                        Rejected
+                        @*<input type="radio" class="form-check-input" id="rejected" name="optradio" value="Rejected">Rejected*@
+                    </label>
+                </div>
+            </div>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Assesment Criteria</th>
+                            @foreach (var member in Model.members)
+                            {
+                                <th>@member.ID</th>
+                            }
+                            <th>Total Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in form.criteria_template)
+                        {
+                            
+                        <tr>
+                            <td>@item.Criteria_title</td>
+                            @for (var i = 0; i < Model.members.Count; i++)
+                            {
+                                <td>
+                                    <div class="form-group">
+                                        @{ var ID1 = i + "-" + item.Criteria_title; }
+                                        @Html.TextBox("Marks", "", new { @class = "form-control form-design", id = ID1, type = "text" })
+                                        @*<input id=@ID1 class="form-control form-design" type="text" value="" />*@
+                                    </div>
+                                </td>
+                            }
+                            <td>@item.Total_marks</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group mt-4">
+                @foreach (var item in form.field_template)
+                {
+                    <label for="comment">@item.Field_title</label>
+                    @Html.TextArea("Fields", "", new { @class = "form-control", rows = "2", id = item.Field_title })
+                    @*<textarea id=@item.Field_title class="form-control" rows="2"></textarea>*@
+                }
+            </div>
+            <div class="form-group">
+                @Html.TextBox("MemberCount", Model.members.Count, new { @class = "form-control d-none" })
+            </div>
+            @*<div class="form-group d-flex mt-4">
+            <label class="mr-2">evaluator&nbsp;name&nbsp;&&nbsp;signature</label>
+            <input class="form-control form-design" type="text" value="" />
+        </div>
+        <div class="form-group d-flex mt-4">
+            <label class="mr-2">supervisor&nbsp;comment&nbsp;&&nbsp;signature</label>
+            <input class="form-control form-design" type="text" value="" />
+        </div>*@
+        </div>
+
+        <button class="btn btn-primary float-right mb-5 mt-4" id="evaluate-button">Evaluate</button>
+    </div>
+    }
+}
+else
+{
+    <h2 class="mt-4 text-center">No such Group</h2>
+}

@@ -1,0 +1,52 @@
+﻿@using FypEvaluationSystem.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    List<Statistics> stats = ViewBag.stats;
+    var acceptedCount = "0";
+    var rejectedCount = "0";
+    var pendingCount = "0";
+    var acceptedWithChangesCount = "0";
+
+    for (int i = 0; i < stats.Count; i++)
+    {
+        if (stats[i].Status.Equals("Accepted"))
+        {
+            acceptedCount = stats[i].Count;
+        }
+        else if (stats[i].Status.Equals("Rejected"))
+        {
+            rejectedCount = stats[i].Count;
+        }
+        else if (stats[i].Status.Equals("Pending"))
+        {
+            pendingCount = stats[i].Count;
+        }
+        else if (stats[i].Status.Equals("Accepted With Changes"))
+        {
+            acceptedWithChangesCount = stats[i].Count;
+        }
+    }
+
+}
+
+<div class="container pt-4">
+
+    <div class="row mt-5">
+        <div class="col">
+            <h2>Statistics</h2>
+        </div>
+    </div>
+
+    <div class="row mx-5">
+        @Html.Partial("AdminStatusLayout", new string[] { "Accepted", acceptedCount, "bg-success" })
+        @Html.Partial("AdminStatusLayout", new string[] { "Rejected", rejectedCount, "bg-danger" })
+    </div>
+
+    <div class="row mx-5">
+        @Html.Partial("AdminStatusLayout", new string[] { "Accepted With Changes", acceptedWithChangesCount, "bg-warning" })
+        @Html.Partial("AdminStatusLayout", new string[] { "Pending", pendingCount, "bg-primary" })
+    </div>
+</div>
+

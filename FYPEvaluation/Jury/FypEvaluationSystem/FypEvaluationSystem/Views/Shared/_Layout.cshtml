@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    
+
+    @Html.Partial("_CssLinks")
+</head>
+<body>
+
+
+    <div class="d-flex" id="wrapper">
+
+        @Html.Partial("_Navbar")
+
+        <div id="page-content-wrapper" class="container">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom d-flex justify-content-between">
+                <button class="btn btn-style" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                @using (Html.BeginForm("Logout", "LoginJury", FormMethod.Post))
+                {
+                    <button class="btn btn-warning">Logout</button>
+                }
+
+            </nav>
+
+            <div class="container body-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    @*<div class="container body-content">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>*@
+
+    @Html.Partial("_JsLinks")
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+﻿@model string[]
+    <div class="col-lg-6 mt-5">
+        <div class="@Model[2] p-5 text-center">
+
+            <a href="#" class="text-white">
+                @Html.ActionLink(@Model[0], "DisplayForm", "Admin", new { status = @Model[0]}, new { @class="text-white"})
+                <br />
+                <span class="text-white">@Model[1]</span>
+            </a>
+        </div>
+    </div>
